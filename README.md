@@ -1,58 +1,175 @@
-# Svelte library
+# Task Management App
 
-Everything you need to build a Svelte library, powered by [`sv`](https://npmjs.com/package/sv).
+A modern task management application built with SvelteKit that helps users organize tasks using the Eisenhower Matrix method. The app provides an intuitive interface for managing tasks across different categories with real-time updates and persistent storage.
 
-Read more about creating a library [in the docs](https://svelte.dev/docs/kit/packaging).
+## Features
 
-## Creating a project
+- **Eisenhower Matrix Organization**: Tasks are automatically organized into four quadrants based on importance and urgency
+- **Category Management**: Group tasks into customizable categories (Work, Personal Projects, Freelance Jobs)
+- **Real-time Updates**: Changes reflect immediately with optimistic updates
+- **Persistent Storage**: All data is automatically saved to localStorage with debounced writes
+- **Accessible UI**: Full keyboard navigation support and ARIA attributes
+- **Responsive Design**: Works seamlessly across desktop and mobile devices
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Technologies Used
 
-```sh
-# create a new project in the current directory
-npx sv create
+- **Frontend Framework**: [SvelteKit](https://kit.svelte.dev/) for robust client-side and server-side rendering
+- **Type Safety**: TypeScript for better developer experience and code reliability
+- **State Management**: Svelte stores with derived stores for complex state calculations
+- **Storage**: Browser localStorage with debounced writes for persistence
+- **Testing**: Vitest for unit testing
+- **Build Tool**: Vite for fast development and optimized production builds
+- **Styling**: Pure CSS with scoped styles for components
 
-# create a new project in my-app
-npx sv create my-app
+## Getting Started
+
+### Prerequisites
+
+- Node.js 16.x or higher
+- npm 7.x or higher
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/Paulcode2/Task-Management-App.git
+cd Task-Management-App
 ```
 
-## Developing
+2. Install dependencies:
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+```bash
+npm install
+```
 
-```sh
+3. Start the development server:
+
+```bash
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+4. Open http://localhost:5173 in your browser
 
-## Building
+### Available Scripts
 
-To build your library:
+- `npm run dev` - Start development server
+- `npm run build` - Create production build
+- `npm run preview` - Preview production build
+- `npm run test` - Run test suite
+- `npm run check` - Type-check the codebase
 
-```sh
-npm pack
+## Project Structure
+
+```
+src/
+├── lib/
+│   ├── components/         # Reusable Svelte components
+│   │   ├── TaskCard.svelte
+│   │   ├── MatrixQuadrant.svelte
+│   │   └── CompletionBar.svelte
+│   ├── stores/            # State management
+│   │   ├── taskStore.ts
+│   │   └── categoryStore.ts
+│   └── utils/             # Helper functions
+│       ├── date.ts
+│       └── storage.ts
+├── routes/                # SvelteKit routes
+│   └── (app)/            # App layout group
+│       ├── +layout.svelte
+│       ├── +page.svelte
+│       ├── settings/
+│       └── tasks/[id]/
+└── app.html              # HTML template
 ```
 
-To create a production version of your showcase app:
+## Core Features Explained
 
-```sh
-npm run build
+### Task Organization (Eisenhower Matrix)
+
+Tasks are automatically organized into four quadrants:
+
+- Important & Urgent
+- Important & Not Urgent
+- Not Important & Urgent
+- Not Important & Not Urgent
+
+The matrix helps users prioritize tasks based on:
+
+- **Importance**: Determined by task priority (High/Medium/Low)
+- **Urgency**: Based on due date (within 48 hours = urgent)
+
+### Category Management
+
+- Tasks can be organized into customizable categories
+- Default categories: Work, Personal Projects, Freelance Jobs
+- Categories can be added/removed in settings
+- Task filtering by category with real-time updates
+
+### State Management
+
+The app uses Svelte stores with:
+
+- Optimistic updates for immediate UI feedback
+- Derived stores for complex calculations (quadrants, completion percentage)
+- Debounced localStorage persistence
+- Type-safe store implementations
+
+## Problem Solved
+
+1. **Task Prioritization**
+
+   - Helps users focus on what matters most using the Eisenhower Matrix
+   - Clear visual organization of tasks by importance and urgency
+   - Prevents important tasks from being overlooked
+
+2. **Work-Life Balance**
+
+   - Separate categories for Work, Personal Projects, and Freelance Jobs
+   - Easy filtering to focus on specific areas of life
+   - Progress tracking per category
+
+3. **Time Management**
+
+   - Due dates and urgency tracking
+   - Visual indicators for approaching deadlines
+   - Automatic quadrant assignment based on priority and time
+
+4. **Data Persistence**
+
+   - No data loss with automatic saving
+   - Works offline with localStorage
+   - Efficient updates with debounced writes
+
+5. **Accessibility**
+   - Keyboard navigation for power users
+   - Screen reader friendly with ARIA labels
+   - High contrast visual design
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to your branch
+5. Open a Pull Request
+
+## Testing
+
+The app includes unit tests for core functionality:
+
+```bash
+# Run the test suite
+npm run test
 ```
 
-You can preview the production build with `npm run preview`.
+Tests cover:
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+- Task store operations
+- Category management
+- Matrix quadrant calculations
+- Completion percentage
 
-## Publishing
+## License
 
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
-
-To publish your library to [npm](https://www.npmjs.com):
-
-```sh
-npm publish
-```
+MIT License - feel free to use this project as a template for your own task management solutions.

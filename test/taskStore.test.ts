@@ -23,7 +23,7 @@ function makeTask(
 }
 
 beforeEach(() => {
-  // reset store
+  // Made sure old store clears out before each test
   tasksStore.replaceAll([] as Task[]);
   selectedCategory.set(null);
 });
